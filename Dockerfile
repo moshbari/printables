@@ -2,19 +2,19 @@
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
-ENV NODE_ENV=development
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma
-RUN npm ci --include=dev || npm install --include=dev
+# Force install of devDependencies regardless of NODE_ENV build-arg
+RUN NODE_ENV=development npm ci --include=dev || NODE_ENV=development npm install --include=dev
 
 # ---- builder ----
 FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
-ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 RUN npx prisma generate
 RUN npm run build
 

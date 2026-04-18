@@ -90,14 +90,6 @@ export default function GeneratorClient({
     }
   }
 
-  async function goToCheckout() {
-    setLoading(true);
-    const r = await fetch("/api/stripe/checkout", { method: "POST" });
-    const j = await r.json();
-    if (j.url) window.location.href = j.url;
-    else setLoading(false);
-  }
-
   function reset() {
     setResult(null);
     setIdea("");
@@ -105,7 +97,7 @@ export default function GeneratorClient({
     setStatus("");
   }
 
-  // --- PAYWALL ---
+  // --- PAYWALL (manual access) ---
   if (paywalled) {
     return (
       <div className="max-w-2xl mx-auto px-5 py-16">
@@ -113,12 +105,12 @@ export default function GeneratorClient({
           <div className="text-5xl">🎉</div>
           <h1 className="mt-4 text-3xl font-black">You used your free one!</h1>
           <p className="mt-3 text-lg text-mute">
-            Unlock unlimited printables for $27/month. Cancel any time, one click.
+            Want unlimited printables? Ask for full access. One click.
           </p>
           <div className="mt-8 grid gap-3">
-            <button onClick={goToCheckout} className="btn-primary-xl w-full" disabled={loading}>
-              {loading ? "Opening checkout…" : "Unlock for $27/month"}
-            </button>
+            <Link href="/pricing" className="btn-primary-xl w-full">
+              Get full access
+            </Link>
             <Link href="/dashboard" className="btn-ghost w-full">See my printable</Link>
           </div>
         </div>

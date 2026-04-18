@@ -36,9 +36,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
+# Copy prisma CLI so `prisma db push` works at runtime (we have no migrations)
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.bin ./node_modules/.bin
 
 RUN mkdir -p /app/storage && chown -R nextjs:nodejs /app/storage
 
 USER nextjs
 EXPOSE 3000
-CMD ["sh", "-c", "npx prisma migrate deploy || npx prisma db push --accept-data-loss; node server.js"]
+CMD ["sh", "-c", "./node_modules/.bin/prisma db push --accept-data-loss --skip-generate; node server.js"]

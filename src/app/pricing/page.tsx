@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
+import GetAccessButton from "@/components/GetAccessButton";
 
 export const dynamic = "force-dynamic";
 
 export default async function Pricing() {
   const session = await getSession();
   const tier = (session?.user as any)?.tier || "FREE";
-  const email = session?.user?.email || "";
 
   return (
     <div className="max-w-4xl mx-auto px-5 py-16">
       <div className="text-center">
         <h1 className="text-5xl font-black">Simple pricing.</h1>
-        <p className="mt-3 text-lg text-mute">One free to try. Ask for full access when you want unlimited.</p>
+        <p className="mt-3 text-lg text-mute">One free to try. One click for full access.</p>
       </div>
 
       <div className="mt-12 grid md:grid-cols-2 gap-6">
@@ -36,34 +36,29 @@ export default async function Pricing() {
             <span className="text-xs bg-accent text-white px-2 py-1 rounded-full">⚡ Unlimited</span>
           </div>
           <div className="mt-2 text-5xl font-black">
-            Full access
+            $37<span className="text-xl text-mute font-normal"> / month</span>
           </div>
           <p className="mt-2 text-mute">Build a real printables shop. One click per printable.</p>
           <ul className="mt-6 space-y-2 text-mute">
             <li>✅ Unlimited printables (fair use 200/mo)</li>
             <li>✅ Pinterest pins included</li>
             <li>✅ Day 1 launch plan included</li>
-            <li>✅ One-click access</li>
+            <li>✅ Cancel any time</li>
           </ul>
           <div className="mt-8">
             {tier === "PRO" ? (
               <div className="btn-ghost w-full">You're on PRO 🎉</div>
             ) : session?.user ? (
-              <a
-                href={`mailto:hello@99dfy.com?subject=Printables%20access%20request&body=Please%20give%20me%20full%20access.%20My%20email%3A%20${encodeURIComponent(email)}`}
-                className="btn-primary-xl w-full text-center block"
-              >
-                Request full access
-              </a>
+              <GetAccessButton />
             ) : (
-              <Link href="/signin" className="btn-primary w-full">Sign in to request access</Link>
+              <Link href="/signin?next=/pricing" className="btn-primary w-full">Sign in to get access</Link>
             )}
           </div>
         </div>
       </div>
 
       <p className="mt-10 text-center text-sm text-mute">
-        Checkout opens soon. For now, just ask and we'll flip the switch.
+        Secure checkout by Whop. No card? No problem — use Apple Pay, Google Pay, or PayPal.
       </p>
     </div>
   );

@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { background: #FAF7F2; color: #0B0B10; }
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-2xl font-semibold transition-all duration-200 select-none;
+}
+.btn-primary {
+  @apply btn bg-accent text-white px-6 py-4 text-lg shadow-glow hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0;
+}
+.btn-primary-xl {
+  @apply btn bg-accent text-white px-10 py-6 text-2xl shadow-glow hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0;
+}
+.btn-ghost {
+  @apply btn bg-white text-ink px-5 py-3 border border-black/10 hover:border-black/30;
+}
+.btn-dark {
+  @apply btn bg-ink text-paper px-6 py-4 hover:brightness-110;
+}
+
+.card { @apply bg-white rounded-3xl border border-black/5 shadow-sm; }
+
+.shine {
+  background: linear-gradient(90deg, transparent, rgba(255,122,26,0.15), transparent);
+  background-size: 200% 100%;
+}
+
+.fade-up { animation: fadeUp 0.5s ease-out both; }
+
+.gradient-title {
+  background: linear-gradient(135deg, #0B0B10 0%, #FF7A1A 55%, #FFB340 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

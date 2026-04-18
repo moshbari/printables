@@ -10,6 +10,7 @@ export default async function Dashboard() {
   if (!session?.user) redirect("/signin");
   const userId = (session.user as any).id as string;
   const tier = (session.user as any).tier || "FREE";
+  const email = (session.user as any).email as string | undefined;
 
   const gens = await prisma.generation.findMany({
     where: { userId },
@@ -25,6 +26,11 @@ export default async function Dashboard() {
           <p className="text-mute mt-1">
             Plan: <b>{tier === "PRO" ? "PRO — Unlimited" : "Free"}</b>
           </p>
+          {email ? (
+            <p className="text-mute text-sm mt-1">
+              Signed in as <b className="text-ink">{email}</b>
+            </p>
+          ) : null}
         </div>
         <div className="flex gap-2">
           <Link href="/generate" className="btn-primary">+ Make another</Link>

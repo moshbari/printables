@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
+import Providers from "@/components/Providers";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Printables — Etsy-ready printables in 60 seconds",
@@ -20,6 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className="min-h-screen bg-paper text-ink antialiased">
+        <Providers>
         <header className="sticky top-0 z-40 backdrop-blur bg-paper/80 border-b border-black/5">
           <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
@@ -49,6 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </div>
         </footer>
+        </Providers>
       </body>
     </html>
   );

@@ -34,16 +34,23 @@ export const authOptions: NextAuthOptions = {
   </div>
 </body>
 </html>`;
+        // Always log the sign-in URL so ops can recover if email fails
+        console.log("[auth] sign-in URL for", identifier, "=>", url);
         if (!process.env.RESEND_API_KEY) {
-          console.log("[auth] RESEND_API_KEY missing — sign-in URL:", url);
+          console.log("[auth] RESEND_API_KEY missing — skipping send");
           return;
         }
-        await resend.emails.send({
+        const result = await resend.emails.send({
           from: process.env.RESEND_FROM || "Printables <noreply@99dfy.com>",
           to: identifier,
           subject,
           html,
         });
+        if ((result as any)?.error) {
+          console.error("[auth] Resend send failed:", (result as any).error);
+          throw new Error(`Resend: ${JSON.stringify((result as any).error)}`);
+        }
+        console.log("[auth] magic link sent to", identifier, "id=", (result as any)?.data?.id);
       },
     }),
   ],

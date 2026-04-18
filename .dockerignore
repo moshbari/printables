@@ -11,3 +11,6 @@ npm-debug.log
 coverage
 dist
 out
+tsconfig.tsbuildinfo
+*.tar.gz
+*.docx

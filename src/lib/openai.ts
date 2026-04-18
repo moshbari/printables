@@ -29,8 +29,8 @@ Return JSON with these exact keys:
 - description: string, 500-900 chars, friendly, includes what's inside, how to use, file format (PDF)
 - tags: array of 13 strings, 2-4 words each, long-tail keywords a real buyer would type
 - price: number, between 3 and 9 (USD)
-- cover_prompt: string, describes a clean minimal pinterest-style cover image with the title text, soft colors, lots of whitespace
-- pages: array of 4-8 objects each with { heading, body }. These are the actual printable pages. Body can be short list items separated by newlines, a prompt, a prayer, a checklist, etc. Make the content USEFUL and specific to the idea.
+- cover_prompt: string. Describe a PURELY DECORATIVE background illustration — soft paper texture, subtle botanical or geometric motifs, soft muted colors (cream, blush, sage, dusty blue). IMPORTANT: "no text, no words, no letters, no typography, no numbers anywhere in the image. Leave the center of the image softer / emptier so overlay text will read well. Pinterest cover aesthetic, flat illustration style, no photographs of people."
+- pages: array of 10-12 objects each with { heading, body }. Each page is one full printable page of a journal/planner/workbook. The heading is short (2-4 words). The body contains 4-6 PROMPTS or fill-in lines, each on its own line separated by newlines. Prompts should be short (one short sentence each, usually ending in ? or :) because the PDF renderer will add real writing lines under each one for the buyer to write in. Vary pages so the journal feels rich: gratitude prompts, reflection questions, mood check-in, dreams and goals, affirmations to copy out, letter to self, self-care checklist, habit tracker prompts, before-bed wind-down, morning intentions, etc. Make every page SPECIFIC to the idea — do not repeat generic prompts.
 - pins: array of 5 objects each with { pin_title, pin_description }. These are Pinterest pin ideas to drive traffic. pin_title 40-60 chars. pin_description 120-200 chars.
 - day_one_plan: array of 5 strings, each a single action step for the seller to launch this listing today (upload to Etsy, post pins, set ads budget $3-5/day, etc.)
 
@@ -55,7 +55,7 @@ export async function generateCover(prompt: string): Promise<string> {
   try {
     const r = await openai.images.generate({
       model: "dall-e-3",
-      prompt: `Clean minimal Pinterest-style cover image, soft paper background, elegant serif-sans mix, lots of whitespace, no photographs of people. ${prompt}`,
+      prompt: `A purely decorative background illustration for a printable journal cover. STRICT: no text, no words, no letters, no numbers, no typography of any kind anywhere in the image. Soft paper texture background. Delicate botanical or geometric motifs around the edges. Keep the center of the image softer and less detailed so overlay text can sit cleanly on top. Muted palette (cream, blush, sage, dusty blue). Flat illustration style. No photographs, no people, no faces, no logos. Pinterest-cover aesthetic. ${prompt}`,
       size: "1024x1024",
       quality: "standard",
       n: 1,

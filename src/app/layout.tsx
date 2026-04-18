@@ -19,8 +19,13 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getSession();
-  const signedIn = !!session?.user;
+  let signedIn = false;
+  try {
+    const session = await getSession();
+    signedIn = !!session?.user;
+  } catch {
+    signedIn = false;
+  }
   return (
     <html lang="en">
       <body className="min-h-screen bg-paper text-ink antialiased">

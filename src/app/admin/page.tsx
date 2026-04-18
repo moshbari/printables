@@ -1,5 +1,7 @@
 import AdminGrantForm from "./AdminGrantForm";
 
+export const dynamic = "force-dynamic";
+
 export default function AdminPage() {
   return (
     <div className="max-w-2xl mx-auto px-5 py-16">

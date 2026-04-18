@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export default async function Pricing() {
   const session = await getSession();
   const tier = (session?.user as any)?.tier || "FREE";

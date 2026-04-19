@@ -20,7 +20,8 @@ RUN npm run build
 
 # ---- runner ----
 FROM node:20-alpine AS runner
-RUN apk add --no-cache openssl
+# curl is required by src/lib/ghl.ts — Node fetch/FormData fails against GHL media API
+RUN apk add --no-cache openssl curl
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1

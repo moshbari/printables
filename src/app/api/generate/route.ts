@@ -7,6 +7,7 @@ import { generateListing, generateCover } from "@/lib/openai";
 import { renderListingPdf } from "@/lib/pdf";
 import { buildZip } from "@/lib/zip";
 import { STORAGE_DIR, ensureStorage, writeFileSafe } from "@/lib/storage";
+import { tryUploadToGhl } from "@/lib/ghl";
 
 export const maxDuration = 120;
 export const runtime = "nodejs";
@@ -95,15 +96,16 @@ export async function POST(req: NextRequest) {
       ...listing.day_one_plan.map((s, i) => `${i + 1}. ${s}`),
     ].join("\n");
 
-    // 5. Save PDF + cover to disk
+    // 5. Save PDF + cover to disk (local fallback — GHL URL preferred)
     const dir = path.join(STORAGE_DIR, gen.id);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const pdfPath = path.join(dir, "printable.pdf");
-    writeFileSafe(pdfPath, pdf);
-    let coverPath: string | null = null;
-    if (coverB64) {
-      coverPath = path.join(dir, "cover.png");
-      writeFileSafe(coverPath, Buffer.from(coverB64, "base64"));
+    const localPdfPath = path.join(dir, "printable.pdf");
+    writeFileSafe(localPdfPath, pdf);
+    let localCoverPath: string | null = null;
+    const coverBuf = coverB64 ? Buffer.from(coverB64, "base64") : null;
+    if (coverBuf) {
+      localCoverPath = path.join(dir, "cover.png");
+      writeFileSafe(localCoverPath, coverBuf);
     }
 
     // 6. Build ZIP
@@ -111,12 +113,29 @@ export async function POST(req: NextRequest) {
       { name: "printable.pdf", content: pdf },
       { name: "etsy-listing.txt", content: listingText },
     ];
-    if (coverB64) entries.push({ name: "cover.png", content: Buffer.from(coverB64, "base64") });
+    if (coverBuf) entries.push({ name: "cover.png", content: coverBuf });
     const zipBuf = await buildZip(entries);
-    const zipPath = path.join(dir, "printable.zip");
-    writeFileSafe(zipPath, zipBuf);
+    const localZipPath = path.join(dir, "printable.zip");
+    writeFileSafe(localZipPath, zipBuf);
 
-    // 7. Update DB
+    // 6b. Push to GHL media library (best-effort — falls back to local disk).
+    // Filename is user-facing; prefix with gen.id to avoid folder collisions.
+    const slug = (listing.title || "printable")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+      .slice(0, 50) || "printable";
+    const shortId = gen.id.slice(0, 8);
+    const [ghlZipUrl, ghlPdfUrl, ghlCoverUrl] = await Promise.all([
+      tryUploadToGhl(zipBuf, `${slug}-${shortId}.zip`, "application/zip"),
+      tryUploadToGhl(pdf, `${slug}-${shortId}.pdf`, "application/pdf"),
+      coverBuf
+        ? tryUploadToGhl(coverBuf, `${slug}-${shortId}.png`, "image/png")
+        : Promise.resolve(null),
+    ]);
+
+    // 7. Update DB — store GHL URL when we got one, disk path otherwise.
+    // Read endpoints branch on startsWith("http").
     await prisma.generation.update({
       where: { id: gen.id },
       data: {
@@ -125,9 +144,9 @@ export async function POST(req: NextRequest) {
         description: listing.description,
         tags: listing.tags,
         price: Number(listing.price) || null,
-        pdfPath,
-        zipPath,
-        coverPath,
+        pdfPath: ghlPdfUrl || localPdfPath,
+        zipPath: ghlZipUrl || localZipPath,
+        coverPath: ghlCoverUrl || localCoverPath,
       },
     });
 

@@ -23,7 +23,17 @@ export async function GET(
   const gen = await prisma.generation.findUnique({ where: { id: params.id } });
   if (!gen || gen.userId !== userId) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  const filePath = path.join(STORAGE_DIR, params.id, params.name);
+  // Prefer the stored pointer (GHL URL or disk path) over a reconstructed disk path.
+  // Legacy rows from before GHL migration still have plain disk paths; those keep working.
+  const stored = params.name.endsWith(".pdf") ? gen.pdfPath : gen.coverPath;
+
+  if (stored && (stored.startsWith("http://") || stored.startsWith("https://"))) {
+    return NextResponse.redirect(stored, 302);
+  }
+
+  const filePath = stored && stored.startsWith("/")
+    ? stored
+    : path.join(STORAGE_DIR, params.id, params.name);
   if (!fs.existsSync(filePath)) return NextResponse.json({ error: "Missing" }, { status: 404 });
   const buf = fs.readFileSync(filePath);
   const type = params.name.endsWith(".pdf") ? "application/pdf" : "image/png";

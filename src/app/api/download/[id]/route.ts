@@ -15,7 +15,17 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
   if (!gen || gen.userId !== userId) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  if (!gen.zipPath || !fs.existsSync(gen.zipPath)) {
+  if (!gen.zipPath) {
+    return NextResponse.json({ error: "ZIP not ready" }, { status: 404 });
+  }
+
+  // GHL CDN URL — redirect the browser to it (no bytes through our server)
+  if (gen.zipPath.startsWith("http://") || gen.zipPath.startsWith("https://")) {
+    return NextResponse.redirect(gen.zipPath, 302);
+  }
+
+  // Legacy disk path (pre-GHL rows)
+  if (!fs.existsSync(gen.zipPath)) {
     return NextResponse.json({ error: "ZIP not ready" }, { status: 404 });
   }
   const buf = fs.readFileSync(gen.zipPath);

@@ -19,6 +19,8 @@ export const authOptions: NextAuthOptions = {
       sendVerificationRequest: async ({ identifier, url }) => {
         const brand = "Printables";
         const subject = `Your ${brand} sign-in link`;
+        const siteBase = process.env.NEXTAUTH_URL || "https://printables.99dfy.com";
+        const giftUrl = `${siteBase.replace(/\/$/, "")}/plan/first-sale-blueprint-vf7x3k`;
         const html = `
 <!doctype html>
 <html>
@@ -30,6 +32,13 @@ export const authOptions: NextAuthOptions = {
       <p style="margin:0 0 24px;color:#6B6B75;line-height:1.6;">Click the big button. You are in.</p>
       <a href="${url}" style="display:inline-block;background:#FF7A1A;color:#fff;padding:16px 28px;border-radius:12px;font-weight:700;text-decoration:none;font-size:17px;">Sign me in</a>
       <p style="margin:28px 0 0;color:#6B6B75;font-size:13px;line-height:1.6;">Link is good for 24 hours. If you didn't ask for this, just ignore it.</p>
+    </div>
+
+    <div style="margin-top:20px;background:#fff;border-radius:16px;padding:24px;border:2px solid rgba(255,122,26,0.25);">
+      <div style="font-size:12px;font-weight:700;color:#FF7A1A;text-transform:uppercase;letter-spacing:0.04em;">🎁 Your free gift</div>
+      <div style="font-size:18px;font-weight:800;margin-top:6px;">$0 → $X in 7 days — simple plan</div>
+      <p style="margin:8px 0 14px;color:#6B6B75;line-height:1.6;font-size:14px;">Real numbers. No lies. A step-by-step path to your first Etsy sale this week.</p>
+      <a href="${giftUrl}" style="display:inline-block;background:#0B0B10;color:#fff;padding:12px 20px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14px;">Open my free plan →</a>
     </div>
   </div>
 </body>

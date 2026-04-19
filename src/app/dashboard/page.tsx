@@ -40,6 +40,22 @@ export default async function Dashboard() {
         </div>
       </div>
 
+      {/* Free gift card — shown to all signed-in users */}
+      <Link
+        href="/plan/first-sale-blueprint-vf7x3k"
+        className="mt-6 block card p-6 border-2 border-accent/30 bg-gradient-to-r from-accent/5 to-white hover:-translate-y-0.5 transition-transform"
+      >
+        <div className="flex items-center gap-4 flex-wrap">
+          <div className="w-14 h-14 shrink-0 rounded-2xl bg-accent text-white flex items-center justify-center text-3xl">🎁</div>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs font-bold uppercase text-accent">Your free gift</div>
+            <div className="text-xl font-black mt-0.5">$0 → $X in 7 days — your simple plan</div>
+            <div className="text-mute text-sm mt-1">Real numbers. No lies. Click to open.</div>
+          </div>
+          <div className="text-accent font-black text-2xl">→</div>
+        </div>
+      </Link>
+
       {gens.length === 0 ? (
         <div className="card p-16 mt-10 text-center">
           <div className="text-6xl">📭</div>

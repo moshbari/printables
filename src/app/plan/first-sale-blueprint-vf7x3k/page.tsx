@@ -5,7 +5,7 @@ import { getSession } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Your $0 → $22 Plan — Printables",
+  title: "Your $0 → First $22 Plan — Printables",
   description: "The simple 7-day plan to your first Etsy printable sale. Real numbers. No fluff.",
   robots: { index: false, follow: false, nocache: true },
 };
@@ -23,7 +23,7 @@ export default async function PlanPage() {
           Free gift — for people who signed up
         </div>
         <h1 className="mt-6 text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
-          <span className="gradient-title">$0 → $22</span>
+          <span className="gradient-title">$0 → First $22</span>
           <br />
           in 7 days.
         </h1>

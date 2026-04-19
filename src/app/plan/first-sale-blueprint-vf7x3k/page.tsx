@@ -31,6 +31,14 @@ export default async function PlanPage() {
           The simple plan. Real numbers. No lies. You copy the steps, you can make your first sale this week.
         </p>
         <p className="mt-3 text-sm text-mute">All numbers below are from Etsy, not made up. You can check them yourself.</p>
+        <div className="mt-10 mx-auto max-w-4xl rounded-3xl overflow-hidden bg-paper aspect-video shadow-xl">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/80610b29-db3f-4fdb-adde-00a62db49ba7.png"
+            alt="Your first sale notification on the desk"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
       </section>
 
       {/* STEP 1: Pick a proven winner */}
@@ -41,6 +49,15 @@ export default async function PlanPage() {
             <h2 className="text-3xl font-black">Pick a proven idea.</h2>
             <p className="mt-2 text-lg text-mute">Do not guess. Copy what is already selling.</p>
           </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/7e12391a-b955-4fdf-ab49-411b39fc74bf.png"
+            alt="Laptop on desk showing an Etsy search for printables"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
         </div>
 
         <div className="mt-6 grid md:grid-cols-2 gap-5">
@@ -77,6 +94,15 @@ export default async function PlanPage() {
           </div>
         </div>
 
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/c40db8e3-b08d-4ec1-b38f-d833aec2606e.png"
+            alt="The moment of clicking generate on a clean app interface"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
         <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { t: "Printable PDF", d: "Clean and ready to print." },
@@ -105,6 +131,16 @@ export default async function PlanPage() {
             <p className="mt-2 text-lg text-mute">$0.20 per listing. Takes 3 minutes each.</p>
           </div>
         </div>
+
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/ee1407ed-a221-4ad6-81c3-5b86e0816982.png"
+            alt="Three printable covers fanned on the desk ready to upload"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
         <div className="mt-5 text-mute">
           Price each one at <b className="text-ink">$14.99</b>. That is normal for a nice printable bundle on Etsy. Use the title and tags from Printables. Upload the PDF and cover. Done.
         </div>
@@ -132,6 +168,15 @@ export default async function PlanPage() {
             <h2 className="text-3xl font-black">Test with tiny ads.</h2>
             <p className="mt-2 text-lg text-mute">$2 a day. That is it. Days 1–4.</p>
           </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/3c240633-5b3e-48fe-8434-01b7060e06d9.png"
+            alt="Laptop showing a small daily ad budget slider"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
         </div>
 
         <div className="mt-5 text-mute">
@@ -169,6 +214,16 @@ export default async function PlanPage() {
             <p className="mt-2 text-lg text-mute">Pause the other two. Put all your money on the one people love.</p>
           </div>
         </div>
+
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/28c2734a-1fc9-4a91-8729-4c0780de52e4.png"
+            alt="Clear winner among three listings on the laptop screen"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
         <div className="mt-5 text-mute">
           The winner is the listing with the <b className="text-ink">most clicks</b> (and any sales).
           Pause the two losers. Move your ad budget to the winner at <b className="text-ink">$3/day × 3 days = $9</b>.
@@ -187,6 +242,15 @@ export default async function PlanPage() {
             <h2 className="text-3xl font-black">Add free traffic (15 min/day).</h2>
             <p className="mt-2 text-lg text-mute">Pinterest + Instagram + Facebook. Just post pictures.</p>
           </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/c12f235d-4ffd-41a4-a519-e9eaaa5f8b82.png"
+            alt="Phone and laptop showing social feeds of printable posts"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
         </div>
 
         <div className="mt-5 grid md:grid-cols-3 gap-4">
@@ -216,6 +280,15 @@ export default async function PlanPage() {
       <section className="mt-10 card p-8 bg-gradient-to-br from-white to-paper">
         <h2 className="text-4xl font-black text-center">Week 1 math. Real numbers.</h2>
         <p className="mt-2 text-center text-mute">Product priced at $14.99. Etsy keeps about $1.67 per sale. You keep <b className="text-ink">$13.32</b>.</p>
+
+        <div className="mt-8 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/d7937c9b-6799-4d61-92fe-dcfbda3ff989.png"
+            alt="Notebook with handwritten math and a calculator on the desk"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
 
         <div className="mt-8 grid md:grid-cols-2 gap-5">
           {/* You spend */}
@@ -283,6 +356,15 @@ export default async function PlanPage() {
         <h2 className="text-3xl font-black">What happens after week 1?</h2>
         <p className="mt-3 text-mute text-lg">This is where it gets fun.</p>
 
+        <div className="mt-6 rounded-2xl overflow-hidden bg-paper aspect-video">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/23552fae-55d8-426c-9172-9d8bb70877c7.png"
+            alt="Laptop showing an upward growth chart with a calendar in the background"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
         <div className="mt-5 space-y-4 text-lg">
           <div className="flex gap-4">
             <div className="w-8 h-8 shrink-0 rounded-full bg-accent/20 text-accent flex items-center justify-center font-black">✓</div>
@@ -309,6 +391,14 @@ export default async function PlanPage() {
           Ready to start? Your first one is <span className="gradient-title">free</span>.
         </h2>
         <p className="mt-4 text-xl text-mute">No card. No tricks. Test the whole thing before you pay.</p>
+        <div className="mt-8 mx-auto max-w-3xl rounded-2xl overflow-hidden bg-paper aspect-video shadow-xl">
+          <img
+            src="https://assets.cdn.filesafe.space/MV4qgCBrDVTq6S9QIYNa/media/4292c433-b94e-4aa6-b5b6-c9695d7422f5.png"
+            alt="Fresh morning desk ready to begin"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <Link href={ctaHref} className="btn-primary-xl">Make my first printable →</Link>
           <Link href="/pricing" className="btn-ghost">See PRO ($27/mo for 3-variant testing)</Link>

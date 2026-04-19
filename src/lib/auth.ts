@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
 
     <div style="margin-top:20px;background:#fff;border-radius:16px;padding:24px;border:2px solid rgba(255,122,26,0.25);">
       <div style="font-size:12px;font-weight:700;color:#FF7A1A;text-transform:uppercase;letter-spacing:0.04em;">🎁 Your free gift</div>
-      <div style="font-size:18px;font-weight:800;margin-top:6px;">$0 → $X in 7 days — simple plan</div>
+      <div style="font-size:18px;font-weight:800;margin-top:6px;">$0 → $22 in 7 days — simple plan</div>
       <p style="margin:8px 0 14px;color:#6B6B75;line-height:1.6;font-size:14px;">Real numbers. No lies. A step-by-step path to your first Etsy sale this week.</p>
       <a href="${giftUrl}" style="display:inline-block;background:#0B0B10;color:#fff;padding:12px 20px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14px;">Open my free plan →</a>
     </div>

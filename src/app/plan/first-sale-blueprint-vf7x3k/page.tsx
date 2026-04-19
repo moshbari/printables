@@ -5,7 +5,7 @@ import { getSession } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Your $0 → $X Plan — Printables",
+  title: "Your $0 → $22 Plan — Printables",
   description: "The simple 7-day plan to your first Etsy printable sale. Real numbers. No fluff.",
   robots: { index: false, follow: false, nocache: true },
 };
@@ -23,7 +23,7 @@ export default async function PlanPage() {
           Free gift — for people who signed up
         </div>
         <h1 className="mt-6 text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
-          <span className="gradient-title">$0 → $X</span>
+          <span className="gradient-title">$0 → $22</span>
           <br />
           in 7 days.
         </h1>
@@ -316,6 +316,25 @@ export default async function PlanPage() {
         <p className="mt-6 text-sm text-mute max-w-2xl mx-auto">
           Honest note: these numbers are an average. Some shops sell more. Some sell less. Your title, cover, and niche all matter. But the path is real.
         </p>
+      </section>
+
+      {/* LEGAL DISCLAIMER */}
+      <section className="mb-16">
+        <div className="rounded-2xl bg-white border border-black/10 p-6 text-xs text-mute leading-relaxed">
+          <div className="font-bold text-ink uppercase tracking-wide text-[11px] mb-2">Important disclaimer — please read</div>
+          <p className="mb-3">
+            This page is for <b>educational and informational purposes only</b>. It is <b>not</b> financial advice, investment advice, business advice, legal advice, or tax advice. Nothing on this page should be treated as a promise, guarantee, or prediction of any specific financial result.
+          </p>
+          <p className="mb-3">
+            The example numbers shown (prices, fees, click rates, conversion rates, ad costs, and profit figures) are <b>illustrative averages</b> drawn from publicly available Etsy platform information and typical seller benchmarks as of 2026. They are not based on your individual shop, niche, audience, or effort, and they are not a forecast of what you will earn. Your actual results will depend on factors including but not limited to: your product quality, title and imagery, pricing, niche competition, ad bid, search ranking, seasonality, conversion rate, refund rate, tax jurisdiction, Etsy policy changes, and the time and effort you put in. <b>Many sellers earn less than these examples. Some earn nothing. Some earn more.</b> Past performance, industry averages, and third-party case studies do not predict your future results.
+          </p>
+          <p className="mb-3">
+            Running an Etsy shop involves real costs (listing fees, transaction fees, payment processing fees, ad spend, taxes) and real risk of financial loss. You alone are responsible for your business decisions — including pricing, ad budgets, inventory, customer service, tax reporting, and compliance with Etsy's Seller Policy, Intellectual Property rules, and any laws that apply where you live and sell. Printables is a tool that helps you create digital product files; it does not sell on your behalf and is not affiliated with, endorsed by, or partnered with Etsy, Inc., Pinterest, Meta, or any other platform mentioned on this page. All trademarks belong to their respective owners.
+          </p>
+          <p>
+            By using this plan you agree that Printables and its owners, operators, and affiliates are <b>not liable</b> for any direct, indirect, incidental, consequential, or lost-profit damages arising from your use of (or inability to use) the information on this page, to the maximum extent permitted by law. If you are unsure whether this approach is right for you, please consult a licensed professional (accountant, attorney, or financial advisor) before spending money.
+          </p>
+        </div>
       </section>
     </div>
   );

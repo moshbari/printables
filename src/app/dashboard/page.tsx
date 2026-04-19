@@ -49,7 +49,7 @@ export default async function Dashboard() {
           <div className="w-14 h-14 shrink-0 rounded-2xl bg-accent text-white flex items-center justify-center text-3xl">🎁</div>
           <div className="flex-1 min-w-0">
             <div className="text-xs font-bold uppercase text-accent">Your free gift</div>
-            <div className="text-xl font-black mt-0.5">$0 → $X in 7 days — your simple plan</div>
+            <div className="text-xl font-black mt-0.5">$0 → $22 in 7 days — your simple plan</div>
             <div className="text-mute text-sm mt-1">Real numbers. No lies. Click to open.</div>
           </div>
           <div className="text-accent font-black text-2xl">→</div>
